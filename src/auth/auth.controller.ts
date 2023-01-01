@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
@@ -8,9 +9,9 @@ import {
   Res,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { Csrf, Msg } from './interface/auth.interface';
 import { AuthResponseMsg, AuthRequestBody } from './entities/auth.entity';
 import { AuthDto } from './dto/auth.dto';
-import { Csrf, Msg } from './interface/auth.interface';
 import { AuthService } from './auth.service';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -19,6 +20,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   // @Get('/csrf')
+  // @ApiTags('auth')
+  // @ApiOperation({ summary: 'csrf-tokenを取得' })
   // getCsrfToken(@Req() req: Request): Csrf {
   //   return { csrfToken: req.csrfToken() };
   // }
