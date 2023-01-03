@@ -8,12 +8,12 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { Csrf, Msg } from './interface/auth.interface';
 import { AuthResponseMsg, AuthRequestBody } from './entities/auth.entity';
 import { AuthDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
