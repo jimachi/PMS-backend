@@ -15,6 +15,14 @@ export class ProductService {
     });
   }
 
+  getProductById(productId: number): Promise<Product> {
+    return this.prisma.product.findUnique({
+      where: {
+        id: productId,
+      },
+    });
+  }
+
   createProduct(dto: ProductDto): Promise<Product> {
     const product = this.prisma.product.create({
       data: {
