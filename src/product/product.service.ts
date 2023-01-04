@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ForbiddenException } from '@nestjs/common';
 import { ProductDto } from './dto/product.dto';
 import { PrismaService } from './../prisma/prisma.service';
 import { Product } from '@prisma/client';
@@ -31,5 +31,26 @@ export class ProductService {
     });
 
     return product;
+  }
+
+  updateProduct(productId: number, dto: ProductDto): Promise<Product> {
+    const product = this.prisma.product.findUnique({
+      where: {
+        id: productId,
+      },
+    });
+
+    if (!product) {
+      throw new ForbiddenException("Can't find product");
+    }
+
+    return this.prisma.product.update({
+      where: {
+        id: productId,
+      },
+      data: {
+        ...dto,
+      },
+    });
   }
 }

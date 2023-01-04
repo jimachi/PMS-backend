@@ -6,6 +6,7 @@ import {
   Body,
   Param,
   ParseIntPipe,
+  Patch,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from '@prisma/client';
@@ -27,5 +28,13 @@ export class ProductController {
   @Post('/')
   createProduct(@Body() dto: ProductDto): Promise<Product> {
     return this.productService.createProduct(dto);
+  }
+
+  @Patch(':id')
+  updateProduct(
+    @Param('id', ParseIntPipe) productId: number,
+    @Body() dto: ProductDto,
+  ): Promise<Product> {
+    return this.productService.updateProduct(productId, dto);
   }
 }
