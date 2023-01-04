@@ -11,3 +11,9 @@ export class ProductController {
   getProducts(): Promise<Product[]> {
     return this.productService.getProducts();
   }
+
+  @Post('/')
+  createProduct(@Body() dto: ProductDto): Promise<Product> {
+    return this.productService.createProduct(dto);
+  }
+}
