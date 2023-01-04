@@ -7,7 +7,7 @@ import { Product } from '@prisma/client';
 export class ProductService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getProducts(): Promise<Product[]> {
+  getProducts(): Promise<Product[]> {
     return this.prisma.product.findMany({
       orderBy: {
         createAt: 'desc',
@@ -15,7 +15,7 @@ export class ProductService {
     });
   }
 
-  async createProduct(dto: ProductDto): Promise<Product> {
+  createProduct(dto: ProductDto): Promise<Product> {
     const product = this.prisma.product.create({
       data: {
         ...dto,
