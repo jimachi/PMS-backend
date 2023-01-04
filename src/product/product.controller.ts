@@ -20,7 +20,7 @@ export class ProductController {
     return this.productService.getProducts();
   }
 
-  @Get('/:id')
+  @Get(':id')
   getProductById(@Param('id', ParseIntPipe) productId: number) {
     return this.productService.getProductById(productId);
   }
