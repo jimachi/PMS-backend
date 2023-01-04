@@ -7,6 +7,9 @@ import {
   Param,
   ParseIntPipe,
   Patch,
+  HttpCode,
+  HttpStatus,
+  Delete,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from '@prisma/client';
@@ -36,5 +39,13 @@ export class ProductController {
     @Body() dto: ProductDto,
   ): Promise<Product> {
     return this.productService.updateProduct(productId, dto);
+  }
+
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete(':id')
+  deleteProductById(
+    @Param('id', ParseIntPipe) productId: number,
+  ): Promise<void> {
+    return this.productService.deleteProductById(productId);
   }
 }

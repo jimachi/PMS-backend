@@ -53,4 +53,22 @@ export class ProductService {
       },
     });
   }
+
+  async deleteProductById(productId: number): Promise<void> {
+    const product = await this.prisma.product.findUnique({
+      where: {
+        id: productId,
+      },
+    });
+
+    if (!product) {
+      throw new ForbiddenException("product can't find");
+    }
+
+    await this.prisma.product.delete({
+      where: {
+        id: productId,
+      },
+    });
+  }
 }
